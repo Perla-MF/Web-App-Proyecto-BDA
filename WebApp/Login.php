@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($user && password_verify($passw, $user['passw'])) {
+    if ($user && $passw === $user['passw']) { // Comparación directa de contraseñas
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
         echo "Login exitoso. Bienvenido, " . htmlspecialchars($user['username']) . "!";
@@ -23,4 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
+
+
 
